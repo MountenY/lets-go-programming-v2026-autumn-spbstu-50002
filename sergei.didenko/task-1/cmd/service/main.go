@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	var num1 float64
 	var num2 float64
 	var operation string
