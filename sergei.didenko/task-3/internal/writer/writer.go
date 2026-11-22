@@ -15,17 +15,20 @@ const (
 )
 
 func SaveJSON(path string, valutes []currency.Currency) error {
-	if err := os.MkdirAll(filepath.Dir(path), dirPerm); err != nil {
-		return fmt.Errorf("create directory: %w", err)
+	dir := filepath.Dir(path)
+	err := os.MkdirAll(dir, dirPerm)
+	if err != nil {
+		return fmt.Errorf("mkdir: %w", err)
 	}
 
 	data, err := json.MarshalIndent(valutes, "", "  ")
 	if err != nil {
-		return fmt.Errorf("marshal JSON: %w", err)
+		return fmt.Errorf("marshal: %w", err)
 	}
 
-	if err := os.WriteFile(path, data, filePerm); err != nil {
-		return fmt.Errorf("write JSON file: %w", err)
+	err = os.WriteFile(path, data, filePerm)
+	if err != nil {
+		return fmt.Errorf("write file: %w", err)
 	}
 
 	return nil
