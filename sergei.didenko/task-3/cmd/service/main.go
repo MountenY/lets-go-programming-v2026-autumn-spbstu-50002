@@ -33,6 +33,4 @@ func main() {
 	if err := writer.SaveJSON(cfg.OutputFile, valutes); err != nil {
 		log.Fatalf("cannot save JSON: %v", err)
 	}
-
-	log.Printf("Successfully saved to %s", cfg.OutputFile)
 }
