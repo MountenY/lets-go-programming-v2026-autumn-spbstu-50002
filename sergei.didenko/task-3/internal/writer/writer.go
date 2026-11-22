@@ -17,6 +17,7 @@ const (
 func SaveJSON(path string, valutes []currency.Currency) error {
 	dir := filepath.Dir(path)
 	err := os.MkdirAll(dir, dirPerm)
+
 	if err != nil {
 		return fmt.Errorf("mkdir: %w", err)
 	}
