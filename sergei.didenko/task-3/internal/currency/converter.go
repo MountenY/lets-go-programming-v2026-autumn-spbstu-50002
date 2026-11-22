@@ -20,7 +20,6 @@ func Convert(source []CurrencyXML) ([]Currency, error) {
 
 		parsedVal, err := strconv.ParseFloat(rawValue, 64)
 		if err != nil {
-
 			return nil, fmt.Errorf("failed to parse value '%s' for %s: %w", item.Value, item.CharCode, err)
 		}
 
