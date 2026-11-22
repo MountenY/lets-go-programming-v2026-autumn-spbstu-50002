@@ -30,10 +30,10 @@ func LoadXML(path string) (*CurrencyRatesXML, error) {
 	decoder := xml.NewDecoder(file)
 	decoder.CharsetReader = charset.NewReaderLabel
 
-	rates := &CurrencyRatesXML{}
-	if err := decoder.Decode(rates); err != nil {
+	var rates CurrencyRatesXML
+	if err := decoder.Decode(&rates); err != nil {
 		return nil, fmt.Errorf("decode XML: %w", err)
 	}
 
-	return rates, nil
+	return &rates, nil
 }
