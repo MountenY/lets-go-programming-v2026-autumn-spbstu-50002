@@ -33,7 +33,6 @@ func LoadXML(path string) (*CurrencyRatesXML, error) {
 
 	var rates CurrencyRatesXML
 	err = decoder.Decode(&rates)
-
 	if err != nil {
 		return nil, fmt.Errorf("decode XML: %w", err)
 	}
