@@ -7,4 +7,5 @@ func SortByValueDescending(currencies []Currency) {
 
 		return currencies[i].Value > currencies[j].Value
 	})
+
 }
