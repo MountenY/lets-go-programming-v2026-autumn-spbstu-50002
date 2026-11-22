@@ -1,6 +1,6 @@
 module github.com/MountenY/task-3
 
-go 1.26.0
+go 1.22
 
 require (
 	go.yaml.in/yaml/v3 v3.0.6
