@@ -23,7 +23,6 @@ func LoadXML(path string) (*CurrencyRatesXML, error) {
 	if err != nil {
 		return nil, fmt.Errorf("open XML file: %w", err)
 	}
-
 	defer func() {
 		_ = file.Close()
 	}()
@@ -31,11 +30,10 @@ func LoadXML(path string) (*CurrencyRatesXML, error) {
 	decoder := xml.NewDecoder(file)
 	decoder.CharsetReader = charset.NewReaderLabel
 
-	var rates CurrencyRatesXML
-	err = decoder.Decode(&rates)
-	if err != nil {
+	rates := &CurrencyRatesXML{}
+	if err := decoder.Decode(rates); err != nil {
 		return nil, fmt.Errorf("decode XML: %w", err)
 	}
 
-	return &rates, nil
+	return rates, nil
 }

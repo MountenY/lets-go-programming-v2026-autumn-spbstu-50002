@@ -15,9 +15,7 @@ const (
 )
 
 func SaveJSON(path string, valutes []currency.Currency) error {
-	dir := filepath.Dir(path)
-	err := os.MkdirAll(dir, dirPerm)
-	if err != nil {
+	if err := os.MkdirAll(filepath.Dir(path), dirPerm); err != nil {
 		return fmt.Errorf("mkdir: %w", err)
 	}
 
@@ -26,8 +24,7 @@ func SaveJSON(path string, valutes []currency.Currency) error {
 		return fmt.Errorf("marshal: %w", err)
 	}
 
-	err = os.WriteFile(path, data, filePerm)
-	if err != nil {
+	if err := os.WriteFile(path, data, filePerm); err != nil {
 		return fmt.Errorf("write file: %w", err)
 	}
 
