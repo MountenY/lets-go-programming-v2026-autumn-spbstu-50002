@@ -37,3 +37,5 @@ func LoadXML(path string) (*CurrencyRatesXML, error) {
 
 	return &rates, nil
 }
+
+//sss
