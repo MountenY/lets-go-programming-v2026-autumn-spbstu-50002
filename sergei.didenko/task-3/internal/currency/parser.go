@@ -19,23 +19,21 @@ type CurrencyRatesXML struct {
 }
 
 func LoadXML(path string) (*CurrencyRatesXML, error) {
-	file, err := os.Open(path)
-	if err != nil {
+	if file, err := os.Open(path); err != nil {
 		return nil, fmt.Errorf("open XML file: %w", err)
+	} else {
+		defer func() {
+			_ = file.Close()
+		}()
+
+		decoder := xml.NewDecoder(file)
+		decoder.CharsetReader = charset.NewReaderLabel
+
+		var rates CurrencyRatesXML
+		if err := decoder.Decode(&rates); err != nil {
+			return nil, fmt.Errorf("decode XML: %w", err)
+		}
+
+		return &rates, nil
 	}
-	defer func() {
-		_ = file.Close()
-	}()
-
-	decoder := xml.NewDecoder(file)
-	decoder.CharsetReader = charset.NewReaderLabel
-
-	var rates CurrencyRatesXML
-	if err := decoder.Decode(&rates); err != nil {
-		return nil, fmt.Errorf("decode XML: %w", err)
-	}
-
-	return &rates, nil
 }
-
-//sss
